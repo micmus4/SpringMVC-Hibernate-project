@@ -6,9 +6,11 @@
 
     <session-factory>
 
+        <!--        postgres 8340 port, username: postgres, pass: admin-->
+
         <!-- JDBC Database connection settings -->
         <property name="connection.driver_class">org.postgresql.Driver</property>
-        <property name="connection.url">jdbc:postgresql://localhost:5432/hib_project_1?useSSL=false&amp;serverTimezone=UTC</property>
+        <property name="connection.url">jdbc:postgresql://localhost:8340/hib_project_1?useSSL=false&amp;serverTimezone=UTC</property>
         <property name="connection.username">postgres</property>
         <property name="connection.password">admin</property>
 
