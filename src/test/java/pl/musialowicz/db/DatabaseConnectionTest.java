@@ -2,11 +2,12 @@ package pl.musialowicz.db;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.w3c.dom.NodeList;
+import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 import java.io.File;
 import java.sql.Connection;
@@ -22,28 +23,22 @@ public class DatabaseConnectionTest
         {
             // retrieving hibernate configuration file from main/resources.
             final File hibernateCfgFile = new File( "src/main/resources/hibernate.cfg.xml" );
-            final InputSource inputSource = new InputSource( hibernateCfgFile.getPath() );
+            final InputSource inputSource = new InputSource( hibernateCfgFile.getCanonicalPath() );
 
             // we use XPath to read XML file.
             final XPath xpath = XPathFactory.newInstance().newXPath();
 
             // expressions to retrieve connection data from hibernate configuration file.
-            final String urlExpression =
-                    "hibernate-configuration/session-factory/property[@name=\"connection.url\"]/text()";
-            final String usernameExpression =
-                    "hibernate-configuration/session-factory/property[@name=\"connection.username\"]/text()";
-            final String passwordExpression =
-                    "hibernate-configuration/session-factory/property[@name=\"connection.password\"]/text()";
+            final XPathExpression urlExpression =
+                    xpath.compile("hibernate-configuration/session-factory/property[@name=\"connection.url\"]/text()" );
+            final XPathExpression usernameExpression =
+                   xpath.compile( "hibernate-configuration/session-factory/property[@name=\"connection.username\"]/text()" );
+            final XPathExpression passwordExpression =
+                    xpath.compile( "hibernate-configuration/session-factory/property[@name=\"connection.password\"]/text()" );
 
-            final String url =
-                    ((NodeList) xpath.evaluate( urlExpression, inputSource, XPathConstants.NODESET) )
-                            .item( 0 ).getNodeValue();
-            final String username =
-                    ((NodeList) xpath.evaluate(usernameExpression, inputSource, XPathConstants.NODESET ) )
-                            .item( 0 ).getNodeValue();
-            final String password =
-                    ((NodeList) xpath.evaluate(passwordExpression, inputSource, XPathConstants.NODESET ) )
-                            .item( 0 ).getNodeValue();
+            final String url = ( (Node)urlExpression.evaluate( inputSource, XPathConstants.NODE ) ).getTextContent();
+            final String username = ( (Node)usernameExpression.evaluate( inputSource, XPathConstants.NODE ) ).getTextContent();
+            final String password = ( (Node)passwordExpression.evaluate( inputSource, XPathConstants.NODE ) ).getTextContent();
 
             // building login properties.
             final Properties properties = new Properties();
