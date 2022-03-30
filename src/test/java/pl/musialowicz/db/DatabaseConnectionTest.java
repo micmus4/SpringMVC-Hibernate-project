@@ -38,12 +38,13 @@ public class DatabaseConnectionTest
             final XPath xpath = XPathFactory.newInstance().newXPath();
 
             // expressions to retrieve connection data from hibernate configuration file.
+            // TODO: Fix this ugly retrieving, xPath 1.0 expressions seem to suck ass and not retrieve shit.
             final XPathExpression urlExpression =
-                    xpath.compile("(//@value)[4]" );
+                    xpath.compile("(//@value)[4]" ); // takes value of property with name: jdbcUrl
             final XPathExpression usernameExpression =
-                   xpath.compile( "(//@value)[5]" );
+                   xpath.compile( "(//@value)[5]" ); // takes value of property with name: user
             final XPathExpression passwordExpression =
-                    xpath.compile( "(//@value)[6]" );
+                    xpath.compile( "(//@value)[6]" ); // takes value of property with name: password
 
             final String url = ( (Node)urlExpression.evaluate( inputSource, XPathConstants.NODE ) ).getTextContent();
             final String username = ( (Node)usernameExpression.evaluate( inputSource, XPathConstants.NODE ) ).getTextContent();
