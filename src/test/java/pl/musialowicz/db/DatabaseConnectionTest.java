@@ -2,9 +2,12 @@ package pl.musialowicz.db;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
@@ -21,20 +24,26 @@ public class DatabaseConnectionTest
     {
         try
         {
+            DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+            documentBuilderFactory.setNamespaceAware(true);
+            DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+
             // retrieving hibernate configuration file from main/resources.
-            final File hibernateCfgFile = new File( "src/main/resources/hibernate.cfg.xml" );
-            final InputSource inputSource = new InputSource( hibernateCfgFile.getCanonicalPath() );
+            final File cfgFile = new File( "src/webapp/WEB-INF/spring-mvc-servlet.xml" );
+            final InputSource inputSource = new InputSource( cfgFile.getCanonicalPath() );
+
+            Document document = documentBuilder.parse( cfgFile );
 
             // we use XPath to read XML file.
             final XPath xpath = XPathFactory.newInstance().newXPath();
 
             // expressions to retrieve connection data from hibernate configuration file.
             final XPathExpression urlExpression =
-                    xpath.compile("hibernate-configuration/session-factory/property[@name=\"connection.url\"]/text()" );
+                    xpath.compile("(//@value)[4]" );
             final XPathExpression usernameExpression =
-                   xpath.compile( "hibernate-configuration/session-factory/property[@name=\"connection.username\"]/text()" );
+                   xpath.compile( "(//@value)[5]" );
             final XPathExpression passwordExpression =
-                    xpath.compile( "hibernate-configuration/session-factory/property[@name=\"connection.password\"]/text()" );
+                    xpath.compile( "(//@value)[6]" );
 
             final String url = ( (Node)urlExpression.evaluate( inputSource, XPathConstants.NODE ) ).getTextContent();
             final String username = ( (Node)usernameExpression.evaluate( inputSource, XPathConstants.NODE ) ).getTextContent();
@@ -52,7 +61,7 @@ public class DatabaseConnectionTest
         }
         catch ( Exception aE )
         {
-            Assertions.fail( "Couldn't establish connection with database." );
+            Assertions.fail( "Couldn't establish connection with database - " + aE.getClass().getName() );
         }
     }
 }
