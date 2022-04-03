@@ -9,6 +9,9 @@
         <title> Team Manager - Spring MVC + Hibernate project </title>
     </head>
 
+    <link type="text/css" rel="stylesheet"
+          href="${pageContext.request.contextPath}/resources/css/style.css"/>
+
     <body>
 
         <div id="divHeaderWrapper">
