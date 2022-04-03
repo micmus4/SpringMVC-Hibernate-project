@@ -2,7 +2,6 @@ package pl.musialowicz.db;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 
@@ -25,14 +24,12 @@ public class DatabaseConnectionTest
         try
         {
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-            documentBuilderFactory.setNamespaceAware(true);
+            documentBuilderFactory.setNamespaceAware( true );
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 
             // retrieving hibernate configuration file from main/resources.
             final File cfgFile = new File( "src/webapp/WEB-INF/spring-mvc-servlet.xml" );
             final InputSource inputSource = new InputSource( cfgFile.getCanonicalPath() );
-
-            Document document = documentBuilder.parse( cfgFile );
 
             // we use XPath to read XML file.
             final XPath xpath = XPathFactory.newInstance().newXPath();
