@@ -7,6 +7,10 @@
     <display-name>spring-mvc-demo</display-name>
 
     <absolute-ordering />
+    
+    <welcome-file-list>
+        <welcome-file>/WEB-INF/view/start.jsp</welcome-file>
+    </welcome-file-list>
 
     <!-- Spring MVC Configs -->
 
