@@ -8,11 +8,5 @@ public interface FootballerDAO
 {
     List< Footballer > getFootballers();
 
-    Footballer saveFootballer( Footballer aFootballer );
-
-    Footballer removeFootballer( Footballer aFootballer );
-
-    Footballer updateFootballer( Footballer aFootballer );
-
-    Footballer getFootballer( Integer aFootballerId );
+    void addFootballer( Footballer aFootballer );
 }

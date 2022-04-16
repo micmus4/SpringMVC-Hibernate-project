@@ -20,31 +20,14 @@ public class FootballerDAOImpl implements FootballerDAO
     {
         final Session session = sessionFactory.getCurrentSession();
 
-        final Query< Footballer > getFootballersQuery = session.createQuery( "from Footballer", Footballer.class );
+        final Query< Footballer > getFootballersQuery = session.createQuery( "FROM Footballer", Footballer.class );
         return getFootballersQuery.getResultList();
     }
 
     @Override
-    public Footballer saveFootballer( Footballer aFootballer )
+    public void addFootballer( Footballer aFootballer )
     {
-        return null;
-    }
-
-    @Override
-    public Footballer removeFootballer( Footballer aFootballer )
-    {
-        return null;
-    }
-
-    @Override
-    public Footballer updateFootballer( Footballer aFootballer )
-    {
-        return null;
-    }
-
-    @Override
-    public Footballer getFootballer( Integer aFootballerId )
-    {
-        return null;
+        final Session session = sessionFactory.getCurrentSession();
+        session.save( aFootballer );
     }
 }

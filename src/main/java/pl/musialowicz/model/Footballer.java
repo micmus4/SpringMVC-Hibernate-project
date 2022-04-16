@@ -1,15 +1,22 @@
 package pl.musialowicz.model;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
 @Table( name = "footballers" )
+@Getter
+@Setter
 public class Footballer implements FootballerIf
 {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
     @Column( name = "id" )
+    @Setter( value = AccessLevel.NONE )
     private Integer id;
 
     @Column( name = "first_name" )
@@ -47,96 +54,6 @@ public class Footballer implements FootballerIf
         height = aHeight;
         weight = aWeight;
         contractExpirationDate = aContractExpirationDate;
-        club = aClub;
-    }
-
-    @Override
-    public Integer getId()
-    {
-        return id;
-    }
-
-    @Override
-    public String getFirstName()
-    {
-        return firstName;
-    }
-
-    @Override
-    public void setFirstName( String aFirstName )
-    {
-        firstName = aFirstName;
-    }
-
-    @Override
-    public String getLastName()
-    {
-        return lastName;
-    }
-
-    @Override
-    public void setLastName( String aLastName )
-    {
-        lastName = aLastName;
-    }
-
-    @Override
-    public Date getContractExpirationDate()
-    {
-        return contractExpirationDate;
-    }
-
-    @Override
-    public void setContractExpirationDate( Date aContractExpirationDate )
-    {
-        contractExpirationDate = aContractExpirationDate;
-    }
-
-    @Override
-    public Double getWeeklyWage()
-    {
-        return weeklyWage;
-    }
-
-    @Override
-    public void setWeeklyWage( Double aWeeklyWage )
-    {
-        weeklyWage = aWeeklyWage;
-    }
-
-    @Override
-    public Integer getHeight()
-    {
-        return height;
-    }
-
-    @Override
-    public void setHeight( Integer aHeight )
-    {
-        height = aHeight;
-    }
-
-    @Override
-    public Integer getWeight()
-    {
-        return weight;
-    }
-
-    @Override
-    public void setWeight( Integer aWeight )
-    {
-        weight = aWeight;
-    }
-
-    @Override
-    public String getClub()
-    {
-        return club;
-    }
-
-    @Override
-    public void setClub( String aClub )
-    {
         club = aClub;
     }
 }

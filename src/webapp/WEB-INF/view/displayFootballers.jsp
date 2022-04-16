@@ -22,6 +22,12 @@
 
         <div id="divContentWrapper">
             <div id="divContent">
+
+                <input type="button"
+                       value="Add Footballer"
+                       onclick="window.location.href='${pageContext.request.contextPath}/addFootballer'"
+                       class="add-button">
+
                 <table>
                     <tr>
                         <th>First Name</th>
@@ -29,8 +35,8 @@
                         <th>Club</th>
                         <th>Weekly Wage (€)</th>
                         <th>Contract Expires</th>
-                        <th>Height</th>
-                        <th>Weight</th>
+                        <th>Height (cm)</th>
+                        <th>Weight (kg)</th>
                     </tr>
 
                     <tagLib:forEach var="currentFootballer" items="${footballers}">
