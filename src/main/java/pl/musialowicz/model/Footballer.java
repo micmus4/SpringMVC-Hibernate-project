@@ -1,6 +1,5 @@
 package pl.musialowicz.model;
 
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,7 +15,7 @@ public class Footballer implements FootballerIf
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
     @Column( name = "id" )
-    @Setter( value = AccessLevel.NONE )
+//    @Setter( value = AccessLevel.NONE )
     private Integer id;
 
     @Column( name = "first_name" )

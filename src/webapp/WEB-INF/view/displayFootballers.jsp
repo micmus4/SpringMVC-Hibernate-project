@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="tagLib"%>
+<%@ taglib prefix="taglib" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -23,10 +24,9 @@
         <div id="divContentWrapper">
             <div id="divContent">
 
-                <input type="button"
-                       value="Add Footballer"
-                       onclick="window.location.href='${pageContext.request.contextPath}/addFootballer'"
-                       class="add-button">
+                <form action="${pageContext.request.contextPath}/addOrUpdateFootballer" method="GET">
+                    <button name="eventType" value="add">Add Footballer</button>
+                </form>
 
                 <table>
                     <tr>
@@ -37,9 +37,16 @@
                         <th>Contract Expires</th>
                         <th>Height (cm)</th>
                         <th>Weight (kg)</th>
+                        <th>Action</th>
                     </tr>
 
                     <tagLib:forEach var="currentFootballer" items="${footballers}">
+
+                        <tagLib:url var="updateFootballer" value="addOrUpdateFootballer">
+                            <tagLib:param name="eventType" value="update"/>
+                            <tagLib:param name="footballerId" value="${currentFootballer.id}"/>
+                        </tagLib:url>
+
                         <tr>
                             <td>${currentFootballer.firstName}</td>
                             <td>${currentFootballer.lastName}</td>
@@ -48,6 +55,7 @@
                             <td>${currentFootballer.contractExpirationDate}</td>
                             <td>${currentFootballer.height}</td>
                             <td>${currentFootballer.weight}</td>
+                            <td><a href="${updateFootballer}">Update</a></td>
                         </tr>
                     </tagLib:forEach>
                 </table>

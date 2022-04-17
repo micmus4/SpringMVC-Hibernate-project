@@ -23,49 +23,56 @@
         </div>
 
         <div id="divContentWrapper">
-            <div id="divContentForAddFootballer" class="ignore-css">
-                <h3>Adding Footballer</h3>
+            <div id="divContentForAddFootballer">
+                <h3>${parameter.formName}</h3>
 
-                <form:form action="addFootballer"
-                           modelAttribute="newFootballer"
+                <form:form action="addOrUpdateFootballer"
+                           modelAttribute="parameter"
                            method="POST">
+
+<%--                    we pass the id to POST mapping from GET mapping--%>
+                    <form:hidden path = "footballer.id" value = "${parameter.footballer.id}"/>
 
                     <table>
                         <tbody>
                             <tr>
                                 <td><label>First Name:</label></td>
-                                <td><form:input path="firstName"/></td>
+                                <td><form:input path="footballer.firstName"/></td>
                             </tr>
                             <tr>
                                 <td><label>Last Name:</label></td>
-                                <td><form:input path="lastName"/></td>
+                                <td><form:input path="footballer.lastName"/></td>
                             </tr>
                             <tr>
                                 <td><label>Club:</label></td>
-                                <td><form:input path="club"/></td>
+                                <td><form:input path="footballer.club"/></td>
                             </tr>
                             <tr>
                                 <td><label>Weekly Wage (€):</label></td>
-                                <td><form:input path="weeklyWage"/></td>
+                                <td><form:input path="footballer.weeklyWage"/></td>
                             </tr>
                             <tr>
                                 <td><label>Contract Expiration Date:</label></td>
                                 <td><form:input type="date"
-                                                path="contractExpirationDate"/></td>
+                                                path="footballer.contractExpirationDate"/></td>
                             </tr>
                             <tr>
                                 <td><label>Height (cm):</label></td>
-                                <td><form:input path="height"/></td>
+                                <td><form:input path="footballer.height"/></td>
                             </tr>
                             <tr>
                                 <td><label>Weight (kg):</label></td>
-                                <td><form:input path="weight"/></td>
+                                <td><form:input path="footballer.weight"/></td>
                             </tr>
                             <tr>
                                 <td><label></label></td>
                                 <td>
-                                    <input type="submit"
-                                           value="Add Footballer"/>
+                                    <button
+                                            type="submit"
+                                            name="eventType"
+                                            value="${parameter.formSubmitButtonName.toLowerCase()}">
+                                                ${parameter.formSubmitButtonName}
+                                    </button>
                                 </td>
                             </tr>
                         </tbody>

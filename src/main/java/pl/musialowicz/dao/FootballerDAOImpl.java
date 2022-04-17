@@ -30,4 +30,20 @@ public class FootballerDAOImpl implements FootballerDAO
         final Session session = sessionFactory.getCurrentSession();
         session.save( aFootballer );
     }
+
+    @Override
+    public void updateFootballer( Footballer aFootballer )
+    {
+        final Session session = sessionFactory.getCurrentSession();
+
+        session.update( aFootballer );
+    }
+
+    @Override
+    public Footballer getFootballer( Integer aId )
+    {
+        final Session session = sessionFactory.getCurrentSession();
+
+        return session.get( Footballer.class, aId );
+    }
 }

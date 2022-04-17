@@ -27,4 +27,18 @@ public class FootballerServiceImpl implements FootballerService
     {
         footballerDAO.addFootballer( aFootballer );
     }
+
+    @Override
+    @Transactional
+    public void updateFootballer( Footballer aFootballer )
+    {
+        footballerDAO.updateFootballer( aFootballer );
+    }
+
+    @Override
+    @Transactional
+    public Footballer getFootballer( Integer aId )
+    {
+        return footballerDAO.getFootballer( aId );
+    }
 }

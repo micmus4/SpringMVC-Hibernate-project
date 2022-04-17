@@ -9,4 +9,8 @@ public interface FootballerDAO
     List< Footballer > getFootballers();
 
     void addFootballer( Footballer aFootballer );
+
+    void updateFootballer( Footballer aFootballer );
+
+    Footballer getFootballer( Integer aId );
 }
