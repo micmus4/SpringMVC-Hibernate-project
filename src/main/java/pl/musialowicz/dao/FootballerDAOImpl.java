@@ -46,4 +46,12 @@ public class FootballerDAOImpl implements FootballerDAO
 
         return session.get( Footballer.class, aId );
     }
+
+    @Override
+    public void deleteFootballer( Footballer aFootballer )
+    {
+        final Session session = sessionFactory.getCurrentSession();
+
+        session.delete( aFootballer );
+    }
 }

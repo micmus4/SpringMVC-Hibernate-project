@@ -13,4 +13,6 @@ public interface FootballerService
     void updateFootballer( Footballer aFootballer );
 
     Footballer getFootballer( Integer aId );
+
+    void deleteFootballer( Footballer aFootballer );
 }

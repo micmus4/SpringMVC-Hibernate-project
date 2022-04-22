@@ -41,4 +41,11 @@ public class FootballerServiceImpl implements FootballerService
     {
         return footballerDAO.getFootballer( aId );
     }
+
+    @Override
+    @Transactional
+    public void deleteFootballer( Footballer aFootballer )
+    {
+        footballerDAO.deleteFootballer( aFootballer );
+    }
 }

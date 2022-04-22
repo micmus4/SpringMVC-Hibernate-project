@@ -77,6 +77,24 @@ public class FootballerController
         return "redirect:/displayFootballers";
     }
 
+    @GetMapping("/deleteFootballer")
+    public String deleteFootballer( @RequestParam( name = "footballerId" ) Integer aFootballerId )
+    {
+        final Footballer footballer = footballerService.getFootballer( aFootballerId );
+        footballerService.deleteFootballer( footballer );
+
+        return "redirect:/displayFootballers";
+    }
+
+    @DeleteMapping("/deleteFootballer")
+    public String deleteFootballer2( @RequestParam( name = "footballerId" ) Integer aFootballerId )
+    {
+        final Footballer footballer = footballerService.getFootballer( aFootballerId );
+        footballerService.deleteFootballer( footballer );
+
+        return "redirect:/displayFootballers";
+    }
+
     @InitBinder
     protected void initBinder( WebDataBinder aBinder )
     {

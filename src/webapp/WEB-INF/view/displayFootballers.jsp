@@ -37,13 +37,17 @@
                         <th>Contract Expires</th>
                         <th>Height (cm)</th>
                         <th>Weight (kg)</th>
-                        <th>Action</th>
+                        <th colspan="2">Action</th>
                     </tr>
 
                     <tagLib:forEach var="currentFootballer" items="${footballers}">
 
                         <tagLib:url var="updateFootballer" value="addOrUpdateFootballer">
                             <tagLib:param name="eventType" value="update"/>
+                            <tagLib:param name="footballerId" value="${currentFootballer.id}"/>
+                        </tagLib:url>
+
+                        <tagLib:url var="deleteFootballer" value="deleteFootballer">
                             <tagLib:param name="footballerId" value="${currentFootballer.id}"/>
                         </tagLib:url>
 
@@ -55,7 +59,13 @@
                             <td>${currentFootballer.contractExpirationDate}</td>
                             <td>${currentFootballer.height}</td>
                             <td>${currentFootballer.weight}</td>
-                            <td><a href="${updateFootballer}">Update</a></td>
+                            <td>
+                                <a href="${updateFootballer}">Update</a>
+                            </td>
+                            <td>
+                                <a href="${deleteFootballer}"
+                                   onclick="if (!(confirm('Are you sure you want to delete ${currentFootballer.firstName} ${currentFootballer.lastName}?'))) return false">Delete</a>
+                            </td>
                         </tr>
                     </tagLib:forEach>
                 </table>
